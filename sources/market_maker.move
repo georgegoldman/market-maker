@@ -2,6 +2,7 @@
 /// Module: market_maker
 module market_maker::market_maker;
 use sui::event;
+use sui::table::{Self, Table};
 
 
 // For Move coding conventions, see
@@ -35,11 +36,17 @@ public struct OrderBook< X: store, Y: store> has key, store {
 }
 
 // Create a new order book
-public entry fun create_order_book<X:store, Y:store>(ctx: &mut TxContext) {
+public entry fun create_order_book<X:store, Y:store>(bid_price: u64, ask_price: u64, ctx: &mut TxContext) {
+    let empty_for_bid: vector<Order<X>> = vector[];
+    let empty_for_ask: vector<Order<Y>> = vector[];
+    let bids_table: Table<u64, vector<Order<X>>> = table::new<bid_price, empty_for_bid>(ctx);
+    let asks_table: Table<u64, vector<Order<Y>>> = table::new<ask_price, empty_for_ask>(ctx);
     let order_book = OrderBook<X, Y> {
         id: object::new(ctx),
-        bids: vector::empty<Order<X>>(),
-        asks: vector::empty<Order<Y>>()
+        bids: bids_table,
+        asks: asks_table,
+        best_ask: 0,
+        best_bid: 0
     };
     transfer::share_object(order_book);
 }

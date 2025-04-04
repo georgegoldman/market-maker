@@ -26,7 +26,7 @@ A custom-built, non-AMM market maker implemented using the [Sui Move](https://do
 
 📁 move/ ├── MarketMaker.move # Main logic for placing and matching orders ├── Order.move # Order struct and utilities └── OrderBook.move # OrderBook object and storage
 
-```
+```sui move
 public struct OrderBook< X: store, Y: store> has key, store {
     id: UID,
     bids: Table<u64, vector<Order<X>>>,
