@@ -7,7 +7,7 @@ A custom-built, non-AMM market maker implemented using the [Sui Move](https://do
 - 🔄 Place **bid** and **ask** orders with custom price and amount
 - ⚖️ Match trades using simple limit order logic
 - 💼 On-chain order book storage using Sui Move
-- 🤖 Off-chain bot (TypeScript or Rust) to automate quoting
+- 🤖 Off-chain bot TypeScript to automate quoting
 - 🧩 Plug-and-play architecture for integrating different token pairs
 - 🔒 Optional access control to restrict market making to your bot only
 
